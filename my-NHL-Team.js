@@ -124,20 +124,44 @@ function userExists(toFind) {
   return false;
 }
 
-app.get("/", function(req, res) {
-  // console.log("Client sent request!");
-  // res.send("Hello there man!");
-  var session = req.session;
-  var username = '';
-  if (session.username) {
-    username = session.username;
+app.post("/api/getTeamStanding", function(req, res) {
+  var team = req.body.team;
+  if (team == null) {
+    res.send(JSON.stringify({
+      error: "invalid team"
+    }));
+  } else {
+    Standings.find({
+      Team_Name: team
+    }).then(function(result) {
+      // send team data to client
+      res.send(JSON.stringify({
+        data: result
+      }));
+    }).catch(function(error) {
+      res.send(JSON.stringify({
+        error: error
+      }));
+    });
   }
-  res.render('home', {title: 'Home',
-                      description: 'Home Page',
-                      username: username});
+});
+
+app.get("/", function(req, res) {
+  var session = req.session;
+  if (session.username) {
+    res.render('home', {title: 'Home',
+                        description: 'Home Page',
+                        username: session.username,
+                        });
+  } else {
+    res.render('home', {title: 'Home',
+                        description: 'Home Page'});
+  }
 });
 
 app.get('/register', function(req, res){
+  if (req.session.username)
+    delete req.session.username;
   res.render('register', {title: 'Registration Page'});
 });
 
@@ -146,8 +170,10 @@ app.post('/registrationProcess', function(req, res){
   var password = req.body.pwd;
   var hashedPassword = bcrypt.hashSync(password);
 
-  if (username == null || password == null) {
-    res.redirect('/registrationProcess');
+  if (username == null || password == null
+    || username == "" || password == "") {
+    res.render('register', {errorMessage: 'Invalid username or password.'});
+    res.redirect('/register');
   }
 
   var newUser = new User({username: username,
@@ -188,8 +214,8 @@ app.post('/processLogin', function(req,res) {
 });
 
 app.get('/logout', function(req,res) {
-  req.session.username = '';
-  res.redirect('/');
+  req.session.destroy();
+  res.redirect('/login');
 });
 
 app.listen(7878, function() {
