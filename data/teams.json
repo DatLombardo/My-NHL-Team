@@ -1,0 +1,152 @@
+[
+  {
+    "City": "Anaheim",
+    "Name": "Ducks",
+    "Colours": ["010101", "a2aaad", "fc4c02", "85714d"]
+  },
+  {
+    "City": "Arizona",
+    "Name": "Coyotes",
+    "Colours": ["010101", "862633", "ddcba4"]
+  },
+  {
+    "City": "Boston",
+    "Name": "Bruins",
+    "Colours": ["010101", "ffb81c"]
+  },
+  {
+    "City": "Buffalo",
+    "Name": "Sabres",
+    "Colours": ["041e42", "a2aaad", "ffb81c", "c8102e"]
+  },
+  {
+    "City": "Calgary",
+    "Name": "Flames",
+    "Colours": ["010101", "f1be48", "c8102e"]
+  },
+  {
+    "City": "Carolina",
+    "Name": "Hurricanes",
+    "Colours": ["010101", "a2aaad", "c8102e"]
+  },
+  {
+    "City": "Chicago",
+    "Name": "Blackhawks",
+    "Colours": ["010101", "ff671f", "ffd100", "001871", "c8102e", "00843d", "cc8a00"]
+  },
+  {
+    "City": "Colorado",
+    "Name": "Avalanche",
+    "Colours":  ["010101", "236192", "a4a9ad", "6f263d"]
+  },
+  {
+    "City": "Columbus",
+    "Name": "Blue Jackets",
+    "Colours": ["041e42", "a4a9ad", "c8102e"]
+  },
+  {
+    "City": "Dallas",
+    "Name": "Stars",
+    "Colours": ["010101", "006341", "8a8d8f"]
+  },
+  {
+    "City": "Detroit",
+    "Name": "Red Wings",
+    "Colours": ["c8102e"]
+  },
+  {
+    "City": "Edmonton",
+    "Name": "Oilers",
+    "Colours": ["00205b", "cf4520"]
+  },
+  {
+    "City": "Florida",
+    "Name": "Panthers",
+    "Colours":  ["041e42", "b9975b", "c8102e"]
+  },
+  {
+    "City": "Los Angeles",
+    "Name": "Kings",
+    "Colours": ["010101", "a2aaad"]
+  },
+  {
+    "City": "Minnesota",
+    "Name": "Wild",
+    "Colours": ["154734", "ddcba4", "eaaa00", "a6192e"]
+  },
+  {
+    "City": "Montreal",
+    "Name": "Canadiens",
+    "Colours": ["001e62", "a6192e"]
+  },
+  {
+    "City": "Nashville",
+    "Name": "Predators",
+    "Colours": ["041e42", "ffb81c"]
+  },
+  {
+    "City": "New Jersey",
+    "Name": "Devils",
+    "Colours": ["010101", "c8102e"]
+  },
+  {
+    "City": "New York",
+    "Name": "Islanders",
+    "Colours":["003087", "fc4c02"]
+  },
+  {
+    "City": "New York",
+    "Name": "Rangers",
+    "Colours": ["0033a0", "c8102e"]
+  },
+  {
+    "City": "Ottawa",
+    "Name": "Senators",
+    "Colours": ["010101", "c8102e", "c69214"]
+  },
+  {
+    "City": "Philadelphia",
+    "Name": "Flyers",
+    "Colours": ["010101", "fa4616"]
+  },
+  {
+    "City": "Pittsburgh",
+    "Name": "Penguins",
+    "Colours" :  ["010101", "ffb81c"]
+  },
+  {
+    "City": "San Jose",
+    "Name": "Sharks",
+    "Colours": ["010101", "e57200", "006272"]
+  },
+  {
+    "City": "St. Louis",
+    "Name": "Blues",
+    "Colours": ["041e42", "ffb81c", "003087"]
+  },
+  {
+    "City": "Tampa Bay",
+    "Name": "Lightning",
+    "Colours": ["00205b"]
+  },
+  {
+    "City": "Toronto",
+    "Name": "Maple Leafs",
+    "Colours": ["00205b"]
+  },
+  {
+    "City": "Vancouver",
+    "Name": "Canucks",
+    "Colours": ["00205b", "97999b", "041c2c"]
+  },
+  {
+    "City": "Washington",
+    "Name": "Capitals",
+    "Colours": ["041e42", "a2aaad", "782f40", "a6192e", "53565a"]
+  },
+  {
+    "City": "Winnipeg",
+    "Name": "Jets",
+    "Colours": ["041e42", "c8102e"]
+  }
+]

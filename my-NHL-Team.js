@@ -8,6 +8,7 @@ var uuid = require('uuid/v1');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var assert = require('assert');
+var d3   = require('d3');
 
 // database config
 mongoose.Promise = global.Promise;
@@ -41,6 +42,7 @@ var userSchema = new Schema({
   username:{type: String,
             unique: true,
             index: true},
+  team: String,
   hashedPassword: String
 }, {collection: 'users'});
 var User = mongoose.model('users', userSchema);
@@ -76,6 +78,14 @@ var standingsSchema = new Schema({
  }, {collection: 'standings'});
 var Standings = mongoose.model('standings', standingsSchema);
 
+var teamSchema = new Schema({
+  City: String,
+  Name: String,
+  Colours: [String]
+});
+
+var Teams = mongoose.model('teams', teamSchema);
+
 Player.count(function (err, count) {
     if (!err && count === 0) {
         populatePlayers();
@@ -85,6 +95,12 @@ Player.count(function (err, count) {
 Standings.count(function (err, count) {
     if (!err && count === 0) {
         populateStandings();
+    }
+});
+
+Teams.count(function (err, count) {
+    if (!err && count === 0) {
+        populateTeams();
     }
 });
 
@@ -101,11 +117,26 @@ function populatePlayers(){
     }
   })
 }
+
 function populateStandings(){
   var file = 'data/ConferenceStandings.json'
   jsonfile.readFile(file, function(err, obj) {
     for (var elem of obj){
       var newEntry = new Standings(elem);
+      newEntry.save(function(error) {
+        if (error) {
+          console.log('Error adding standing element.');
+        }
+      });
+    }
+  })
+}
+
+function populateTeams(){
+  var file = 'data/teams.json'
+  jsonfile.readFile(file, function(err, obj) {
+    for (var elem of obj){
+      var newEntry = new Teams(elem);
       newEntry.save(function(error) {
         if (error) {
           console.log('Error adding standing element.');
@@ -125,26 +156,41 @@ function userExists(toFind) {
 }
 
 app.post("/api/getTeamStanding", function(req, res) {
-  var team = req.body.team;
-  if (team == null) {
-    res.send(JSON.stringify({
-      error: "invalid team"
-    }));
-  } else {
+    var session = req.session;
     Standings.find({
-      Team_Name: team
+      Team_Name: session.team
     }).then(function(result) {
-      // send team data to client
-      res.send(JSON.stringify({
-        data: result
-      }));
+      Standings.find({
+        Conference_Name: result[0].Conference_Name
+      }).then(function(result) {
+        res.send(result);
+      }).catch(function(error) {
+        res.send(error);
+      });
     }).catch(function(error) {
-      res.send(JSON.stringify({
-        error: error
-      }));
+      res.send(error);
     });
-  }
 });
+
+app.post("/api/getTeams", function(req, res) {
+    Teams.find({}).then(function(result) {
+      res.send(result);
+    }).catch(function(error) {
+      res.send(error);
+    });
+});
+
+app.post("/api/getPlayers", function(req, res) {
+    var session = req.session;
+    Player.find({
+      Team_Name: session.team
+    }).then(function(result) {
+      res.send(result);
+    }).catch(function(error) {
+      res.send(error);
+    });
+});
+
 
 app.get("/", function(req, res) {
   var session = req.session;
@@ -152,6 +198,7 @@ app.get("/", function(req, res) {
     res.render('home', {title: 'Home',
                         description: 'Home Page',
                         username: session.username,
+                        team: session.team,
                         });
   } else {
     res.render('home', {title: 'Home',
@@ -162,12 +209,16 @@ app.get("/", function(req, res) {
 app.get('/register', function(req, res){
   if (req.session.username)
     delete req.session.username;
+    delete req.session.team;
   res.render('register', {title: 'Registration Page'});
+  //ADD HERE
+
 });
 
 app.post('/registrationProcess', function(req, res){
   var username = req.body.username;
   var password = req.body.pwd;
+  var team = req.body.team;
   var hashedPassword = bcrypt.hashSync(password);
 
   if (username == null || password == null
@@ -177,6 +228,7 @@ app.post('/registrationProcess', function(req, res){
   }
 
   var newUser = new User({username: username,
+                          team: team,
                           hashedPassword: hashedPassword});
   newUser.save(function(error) {
     if (error) {
@@ -184,8 +236,10 @@ app.post('/registrationProcess', function(req, res){
       res.render('register', {errorMessage: 'Unable to register user.'});
     } else {
        req.session.username = username;
+       req.session.team = team;
        res.render('registrationSuccess', {username: username,
-                                               title: 'Welcome aboard!'});
+                                            team: team,
+                                            title: 'Welcome aboard!'});
     }
   });
 });
@@ -206,7 +260,9 @@ app.post('/processLogin', function(req,res) {
     } else {
       if (bcrypt.compareSync(password, results[0].hashedPassword)) {
         req.session.username = username;
+        req.session.team = results[0].team;
         res.render('loginSuccess', {username: username,
+                                        team: req.session.team,
                                          title: 'Login Success'});
       }
     }

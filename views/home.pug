@@ -1,14 +1,17 @@
 extends mainLayout
 block content
+  script(src="https://d3js.org/d3.v4.min.js")
   h1= title
   p= description
   if(username == null)
     p You are not logged in.
-  else
     p You are logged in as #{username}.
-    script(type='text/javascript').
-      $.post("/api/getTeamStanding", { team: "Penguins" }, function(data) {
-        console.log(data);
-        // parse data and display using d3 here
-      });
+  else
+    div(class="container-fluid", id="teamHeader")
+      div(class="col-lg-2", id="teamLogo")
+      div(class="col-lg-10", id="teamName")
+        h2 = team
+    script
+      include ../scripts/homepage.js
+
   div= body
