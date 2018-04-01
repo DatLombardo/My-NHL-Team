@@ -1,4 +1,53 @@
 body {
 	padding-top: 50px;
-	padding-left: 20px;
+}
+#teamHeader {
+	width:100%
+}
+
+#title {
+	padding: 30px;
+	background-color: gray;
+}
+
+h2 {
+	font-size: 75px;
+}
+
+#standings, #plot {
+	height: 700px;
+	background-color: lightgray;
+	padding-top: 25px;
+}
+
+
+#standingsTable, tr{
+	background-color: white;
+	border: 3px solid black;
+	padding: 5px;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 8px;
+}
+
+footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   color: white;
+   text-align: center;
+	 padding-top: 20px;
+	 padding-bottom: 20px;
+}
+
+.navbar-default, footer {
+	background-color: #202020 !important;
+	color: #777;
+}
+
+.tick {
+	font-size: 12px;
 }

@@ -5,5 +5,4 @@ $.post("/api/getTeams", function(data) {
           text : obj.City + " " + obj.Name
     }));
   });
-  // parse data and display using d3 here
 });

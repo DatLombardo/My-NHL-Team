@@ -195,14 +195,11 @@ app.post("/api/getPlayers", function(req, res) {
 app.get("/", function(req, res) {
   var session = req.session;
   if (session.username) {
-    res.render('home', {title: 'Home',
-                        description: 'Home Page',
+    res.render('home', {title: session.team,
                         username: session.username,
-                        team: session.team,
-                        });
+                        team: session.team});
   } else {
-    res.render('home', {title: 'Home',
-                        description: 'Home Page'});
+    res.render('login', {title: 'Log-In Page'});
   }
 });
 
@@ -211,8 +208,6 @@ app.get('/register', function(req, res){
     delete req.session.username;
     delete req.session.team;
   res.render('register', {title: 'Registration Page'});
-  //ADD HERE
-
 });
 
 app.post('/registrationProcess', function(req, res){
@@ -261,9 +256,9 @@ app.post('/processLogin', function(req,res) {
       if (bcrypt.compareSync(password, results[0].hashedPassword)) {
         req.session.username = username;
         req.session.team = results[0].team;
-        res.render('loginSuccess', {username: username,
-                                        team: req.session.team,
-                                         title: 'Login Success'});
+        res.render('home', {username: username,
+                                        team: req.session.team
+                                        });
       }
     }
   });

@@ -9,11 +9,6 @@ html
 		     crossorigin="anonymous")
 
 		link(rel="stylesheet",
-		     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css",
-		     integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r",
-		     crossorigin="anonymous")
-
-		link(rel="stylesheet",
 		     href="/style/main.css")
 
 		script(type="text/javascript", src="https://code.jquery.com/jquery-3.3.1.min.js")
@@ -24,7 +19,7 @@ html
 					button(type="button",
 					       class="navbar-toggle collapsed",
 					       data-toggle="collapse",
-					       data-target="#bs-example-navbar-collapse-1",
+					       data-target="#navbar-collapse-1",
 					       aria-expanded="false")
 						span(class="sr-only") Toggle navigation
 						span(class="icon-bar")
@@ -34,7 +29,7 @@ html
 						span(class="logoText")
 
 				div(class="collapse navbar-collapse",
-				    id="bs-example-navbar-collapse-1")
+				    id="navbar-collapse-1")
 					ul(class="nav navbar-nav navbar-fixed-top")
 						li
 							a(href="/") Home
@@ -49,3 +44,5 @@ html
 
 	body
 		block content
+	footer
+		p Copyright 2018 My NHL Team - Lombardo Patel
