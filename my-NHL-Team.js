@@ -32,7 +32,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   //cookie: {secure: true},
-  secret: 'apollo slackware prepositional expectations'
+  secret: "LombardoPatel"
 }));
 
 // database schema
@@ -133,7 +133,7 @@ function populateStandings(){
 }
 
 function populateTeams(){
-  var file = 'data/teams.json'
+  var file = 'data/TeamColours.json'
   jsonfile.readFile(file, function(err, obj) {
     for (var elem of obj){
       var newEntry = new Teams(elem);
@@ -167,6 +167,17 @@ app.post("/api/getTeamStanding", function(req, res) {
       }).catch(function(error) {
         res.send(error);
       });
+    }).catch(function(error) {
+      res.send(error);
+    });
+});
+
+app.post("/api/getTeamColour", function(req, res) {
+    var session = req.session
+    Teams.find({
+      Name: session.team
+    }).then(function(result) {
+      res.send(result);
     }).catch(function(error) {
       res.send(error);
     });

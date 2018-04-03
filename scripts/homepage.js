@@ -3,7 +3,8 @@ $(document).ready(function() {
     standings: [],
     players: [],
     title: "",
-    team: ""
+    team: "",
+    colours: []
   };
   //Values for d3 svg
   var margin = {top: 20, right: 20, bottom: 20, left: 45};
@@ -13,7 +14,6 @@ $(document).ready(function() {
   //Must be inside the post to access the data
   $.post("/api/getTeamStanding", function(data) {
     config.standings = data;
-    console.log(config.standings);
     config.standings.sort(function(a, b){
       return a.Rank-b.Rank
     })
@@ -27,13 +27,44 @@ $(document).ready(function() {
   });
 
   //Must be inside the post to access the data
+  $.post("/api/getTeamColour", function(data) {
+    config.colours.push(data[0].Colours[0])
+    config.colours.push(data[0].Colours[1])
+  });
+
+  //Must be inside the post to access the data
   $.post("/api/getPlayers", function(data) {
     config.players = data;
     config.title = config.players[0].Team_City + " " + config.players[0].Team_Name
     config.team = config.players[0].Team_Name
     $('<div id="title"></div>').appendTo('#teamHeader');
     $('<h2>'+config.title+'</h2>').appendTo('#title');
-    console.log(config.players);
+
+    //Sort players based on points to determine top players
+    config.players.sort(function(a, b){
+        return b.Points-a.Points
+    })
+
+    //Filter to find only goalies for goalie list
+    var goalies = config.players.filter(function(f) {
+      return f.Pos == "G"
+    });
+
+    for (var i = 0; i < 3; i++){
+      var currPlayer = config.players[i]
+      $("#playerList").append('<li class="list-group-item"><h4>'
+            +currPlayer.First_Name+ " " +currPlayer.Last_Name+
+            " (#" +currPlayer.Jersey_Num+")"+'</h4><p>'+
+            "&nbsp&nbsp&nbsp&nbspGames Played: " +currPlayer.Games_Played
+            + "&nbsp&nbsp&nbspGoals: "+currPlayer.Goals+
+            "&nbsp&nbsp&nbspAssists: "+currPlayer.Assists
+            +'</p></li>');
+    }
+    for (var i = 0; i < goalies.length; i++){
+      $("#goalieList").append('<li class="list-group-item"><h4>'
+            +goalies[i].First_Name+ " " +goalies[i].Last_Name+
+            " (#" +goalies[i].Jersey_Num+")"+'</h4></li>');
+    }
 
     //Write Team Performance Overview
 
@@ -97,7 +128,7 @@ $(document).ready(function() {
         .attr("cy", function(d) {
           return yScale(d.Assists);
         })
-        .style("fill", "red")
+        .style("fill", config.colours[1])
         //Apply tooltip on hover of dot elements
         .append("svg:title")
             .text(function(d,i){

@@ -7,14 +7,13 @@ body {
 
 #title {
 	padding: 30px;
-	background-color: gray;
 }
 
 h2 {
 	font-size: 75px;
 }
 
-#standings, #plot {
+#standings, #plot, {
 	height: 700px;
 	background-color: lightgray;
 	padding-top: 25px;
@@ -25,6 +24,15 @@ h2 {
 	background-color: white;
 	border: 3px solid black;
 	padding: 5px;
+}
+#topPlayers {
+	height: 350px;
+	width: 350px;
+}
+#goalies {
+	position:absolute;
+	height: 350px;
+	width: 350px;
 }
 
 th, td {

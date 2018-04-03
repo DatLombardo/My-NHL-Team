@@ -16,8 +16,16 @@ block content
               th Wins
               th Losses
               th Points
-      div(class="col-lg-8", id="plot")
+      div(class="col-lg-5", id="plot")
         h3 Team Performance Overview
+      div(class="col-lg-3", id="stats")
+        div(id="topPlayers")
+          h3 Top 3 Players
+          ul(class="list-group", id="playerList")
+        div(id="goalies")
+          h3 Goalies
+          ul(class="list-group", id="goalieList")
+
     script
       include ../scripts/homepage.js
 
