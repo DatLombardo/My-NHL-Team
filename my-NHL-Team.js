@@ -267,8 +267,8 @@ app.post('/processLogin', function(req,res) {
       if (bcrypt.compareSync(password, results[0].hashedPassword)) {
         req.session.username = username;
         req.session.team = results[0].team;
-        res.render('home', {username: username,
-                                        team: req.session.team
+        res.render('loginSuccess', {username: username,
+                                    title: 'Welcome!',                                        
                                         });
       }
     }

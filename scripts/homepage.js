@@ -37,13 +37,21 @@ $(document).ready(function() {
     config.players = data;
     config.title = config.players[0].Team_City + " " + config.players[0].Team_Name
     config.team = config.players[0].Team_Name
-    $('<div id="title"></div>').appendTo('#teamHeader');
-    $('<h2>'+config.title+'</h2>').appendTo('#title');
-
+    $('<h2 id="headerName">'+config.title+'</h2>').appendTo('#title');
+    $('#headerName').css("color", "#"+config.colours[0], 'important');
+    $('#standingsTitle').css("color", "#"+config.colours[0], 'important');
+    $('#plotTitle').css("color", "#"+config.colours[0], 'important');
+    $('#topPlayersTitle').css("color", "#"+config.colours[0], 'important');
+    $('#goaliesTitle').css("color", "#"+config.colours[0], 'important');
+    $('#homeButton').css("color", "#"+config.colours[0], 'important');
+    $('#loginButton').css("color", "#"+config.colours[0], 'important');
+    $('#registerButton').css("color", "#"+config.colours[0], 'important');
+    $('#logoutButton').css("color", "#"+config.colours[0], 'important');
+    $('#icon').prepend('<img id="theImg" src="/logos/'+config.team+'.png" />');
     //Sort players based on points to determine top players
     config.players.sort(function(a, b){
         return b.Points-a.Points
-    })
+    });
 
     //Filter to find only goalies for goalie list
     var goalies = config.players.filter(function(f) {

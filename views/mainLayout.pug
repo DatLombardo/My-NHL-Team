@@ -30,19 +30,21 @@ html
 
 				div(class="collapse navbar-collapse",
 				    id="navbar-collapse-1")
-					ul(class="nav navbar-nav navbar-fixed-top")
+					ul(class="nav navbar-nav navbar-fixed-top", id="navigation")
 						li
-							a(href="/") Home
+							div(id="icon")
+						li
+							a(id="homeButton", href="/") Home
 						if (!username || (username === ''))
 							li
-								a(href="/login") Login
+								a(id="loginButton", href="/login") Login
 							li
-								a(href="/register") Sign Up
+								a(id="registerButton", href="/register") Sign Up
 						else
 							li
-								a(href="/logout") Log Out
-
+								a(id="logoutButton", href="/logout") Log Out
+							li(id="title")
 	body
 		block content
 	footer
-		p Copyright 2018 My NHL Team - Lombardo Patel
+		p Copyright 2018 My NHL Team - Lombardo, Patel

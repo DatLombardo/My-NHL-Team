@@ -2,17 +2,17 @@
   {
     "City": "Anaheim",
     "Name": "Ducks",
-    "Colours": ["010101", "fc4c02"]
+    "Colours": ["fc4c02", "fc4c02"]
   },
   {
     "City": "Arizona",
     "Name": "Coyotes",
-    "Colours": ["010101", "862633"]
+    "Colours": ["862633", "862633"]
   },
   {
     "City": "Boston",
     "Name": "Bruins",
-    "Colours": ["010101", "ffb81c"]
+    "Colours": ["ffb81c", "ffb81c"]
   },
   {
     "City": "Buffalo",
@@ -22,17 +22,17 @@
   {
     "City": "Calgary",
     "Name": "Flames",
-    "Colours": ["010101", "c8102e"]
+    "Colours": ["c8102e", "c8102e"]
   },
   {
     "City": "Carolina",
     "Name": "Hurricanes",
-    "Colours": ["010101", "c8102e"]
+    "Colours": ["c8102e", "c8102e"]
   },
   {
     "City": "Chicago",
     "Name": "Blackhawks",
-    "Colours": ["010101", "ff671f"]
+    "Colours": ["ff671f", "ff671f"]
   },
   {
     "City": "Colorado",
@@ -47,7 +47,7 @@
   {
     "City": "Dallas",
     "Name": "Stars",
-    "Colours": ["010101", "006341"]
+    "Colours": ["006341", "006341"]
   },
   {
     "City": "Detroit",
@@ -67,7 +67,7 @@
   {
     "City": "Los Angeles",
     "Name": "Kings",
-    "Colours": ["010101", "a2aaad"]
+    "Colours": ["a2aaad", "a2aaad"]
   },
   {
     "City": "Minnesota",
@@ -87,7 +87,7 @@
   {
     "City": "New Jersey",
     "Name": "Devils",
-    "Colours": ["010101", "c8102e"]
+    "Colours": ["c8102e", "c8102e"]
   },
   {
     "City": "New York",
@@ -102,22 +102,22 @@
   {
     "City": "Ottawa",
     "Name": "Senators",
-    "Colours": ["010101", "c8102e"]
+    "Colours": ["c8102e", "c8102e"]
   },
   {
     "City": "Philadelphia",
     "Name": "Flyers",
-    "Colours": ["010101", "fa4616"]
+    "Colours": ["fa4616", "fa4616"]
   },
   {
     "City": "Pittsburgh",
     "Name": "Penguins",
-    "Colours" :  ["010101", "ffb81c"]
+    "Colours" :  ["ffb81c", "ffb81c"]
   },
   {
     "City": "San Jose",
     "Name": "Sharks",
-    "Colours": ["010101", "006272"]
+    "Colours": ["006272", "006272"]
   },
   {
     "City": "St. Louis",

@@ -1,16 +1,32 @@
 body {
 	padding-top: 50px;
 }
+
 #teamHeader {
-	width:100%
+	width:100%;
+	zoom: 75%;
 }
 
 #title {
-	padding: 30px;
+	margin-top: -9.5px;
+	padding: auto;
+	text-align: center;
+	padding-left: 400px;
+	vertical-align: text-top;
+}
+
+#theImg {
+	height: 50px;
+	width: 50px;
+}
+
+a.hover {
+	color: #000;
 }
 
 h2 {
-	font-size: 75px;
+	font-size: 30px;
+	vertical-align: top;
 }
 
 #standings, #plot, {
@@ -52,8 +68,8 @@ footer {
 }
 
 .navbar-default, footer {
-	background-color: #202020 !important;
-	color: #777;
+	background-color: #f0f0f5 !important;
+	color: #000;
 }
 
 .tick {
