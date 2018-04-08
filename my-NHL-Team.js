@@ -268,8 +268,11 @@ app.post('/processLogin', function(req,res) {
         req.session.username = username;
         req.session.team = results[0].team;
         res.render('loginSuccess', {username: username,
-                                    title: 'Welcome!',                                        
+                                    title: 'Welcome Back!',
                                         });
+      }else {
+        res.render('login', {title: 'Please Log In',
+                            errorMessage: 'Login Credentials Incorrect!'});
       }
     }
   });
