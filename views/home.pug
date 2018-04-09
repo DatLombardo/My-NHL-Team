@@ -4,13 +4,15 @@ block content
 
   script
     include ../scripts/homepage.js
-
+  // Checks if if username is empty
   if(username == null)
     p You are not logged in.
     p You are logged in as #{username}.
   else
     div(class="container-fluid", id="teamHeader")
       div(class="col-lg-12", id="title")
+
+      // generation of table for team standings
       div(class="col-lg-4", id="standings")
         h3(id="standingsTitle") Conference Standings
         table(id="standingsTable")
@@ -20,8 +22,12 @@ block content
               th Wins
               th Losses
               th Points
+
+      // space for Scatterplot
       div(class="col-lg-5", id="plot")
         h3(id="plotTitle") Team Performance Overview
+
+      // used for team statistics (Top players and Goalies)  
       div(class="col-lg-3", id="stats")
         div(id="topPlayers")
           h3(id="topPlayersTitle") Top 3 Players
