@@ -83,7 +83,7 @@ function drawFilteredStats(players, goalies){
 //Overwrite bootstrap settings of CSS / Apply various styling to page
 function applyStyling(config){
   $('<h2 id="headerName">'+config.title+'</h2>').appendTo('#title');
-  $("#headerName").css("padding-left", ($("#navigation").width()/2)-75)
+  $("#headerName").css("padding-left", ($("#navigation").width()/3.5))
   $('#headerName').css("color", "#"+config.colours[0], 'important');
   $('#standingsTitle').css("color", "#"+config.colours[0], 'important');
   $('#plotTitle').css("color", "#"+config.colours[0], 'important');
