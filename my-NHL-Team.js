@@ -38,6 +38,7 @@ app.use(session({
 // database schema
 var Schema = mongoose.Schema;
 
+// attributes for users
 var userSchema = new Schema({
   username:{type: String,
             unique: true,
@@ -47,6 +48,7 @@ var userSchema = new Schema({
 }, {collection: 'users'});
 var User = mongoose.model('users', userSchema);
 
+// attributes for players API
 var playerSchema = new Schema({
    Player_ID: Number,
    Last_Name: String,
@@ -64,6 +66,7 @@ var playerSchema = new Schema({
  }, {collection: 'players'});
 var Player = mongoose.model('players', playerSchema);
 
+// attributes for Team standings API
 var standingsSchema = new Schema({
    Conference_Name: String,
    Team_ID: Number,
@@ -78,6 +81,7 @@ var standingsSchema = new Schema({
  }, {collection: 'standings'});
 var Standings = mongoose.model('standings', standingsSchema);
 
+// attributes for Team's schema API
 var teamSchema = new Schema({
   City: String,
   Name: String,
@@ -86,24 +90,28 @@ var teamSchema = new Schema({
 
 var Teams = mongoose.model('teams', teamSchema);
 
+// Makes sure that Player collection is empty before Populating it with the data
 Player.count(function (err, count) {
     if (!err && count === 0) {
         populatePlayers();
     }
 });
 
+// Makes sure that Standings collection is empty before Populating it with the data
 Standings.count(function (err, count) {
     if (!err && count === 0) {
         populateStandings();
     }
 });
 
+// Makes sure that Teams collection is empty before Populating it with the data
 Teams.count(function (err, count) {
     if (!err && count === 0) {
         populateTeams();
     }
 });
 
+// Uses Api data for Players to populate the Player Collection
 function populatePlayers(){
   var playersFile = 'data/NHLPlayers.json'
   jsonfile.readFile(playersFile, function(err, obj) {
@@ -118,6 +126,7 @@ function populatePlayers(){
   })
 }
 
+// Uses Api data for Standings to populate the Standings Collection
 function populateStandings(){
   var file = 'data/ConferenceStandings.json'
   jsonfile.readFile(file, function(err, obj) {
@@ -132,6 +141,7 @@ function populateStandings(){
   })
 }
 
+// Uses Api data for Teams to populate the Teams Collection
 function populateTeams(){
   var file = 'data/TeamColours.json'
   jsonfile.readFile(file, function(err, obj) {
@@ -146,6 +156,7 @@ function populateTeams(){
   })
 }
 
+// Checks if a user already exists in the Collection of Users
 function userExists(toFind) {
   for (var i = 0; i < usernames.length; i++) {
     if (usernames[i] === toFind) {
@@ -155,6 +166,7 @@ function userExists(toFind) {
   return false;
 }
 
+//Gets team's standings data using Team_Name attribute
 app.post("/api/getTeamStanding", function(req, res) {
     var session = req.session;
     Standings.find({
@@ -172,6 +184,7 @@ app.post("/api/getTeamStanding", function(req, res) {
     });
 });
 
+//Gets the team's color using the name attribute in the teams collection
 app.post("/api/getTeamColour", function(req, res) {
     var session = req.session
     Teams.find({
@@ -183,6 +196,7 @@ app.post("/api/getTeamColour", function(req, res) {
     });
 });
 
+// Gets all teams to populate standings tables
 app.post("/api/getTeams", function(req, res) {
     Teams.find({}).then(function(result) {
       res.send(result);
@@ -191,6 +205,7 @@ app.post("/api/getTeams", function(req, res) {
     });
 });
 
+// Gets all players of the team using Team_Name attribute
 app.post("/api/getPlayers", function(req, res) {
     var session = req.session;
     Player.find({
@@ -202,7 +217,7 @@ app.post("/api/getPlayers", function(req, res) {
     });
 });
 
-
+// Initially routes Log In page
 app.get("/", function(req, res) {
   var session = req.session;
   if (session.username) {
@@ -214,6 +229,7 @@ app.get("/", function(req, res) {
   }
 });
 
+// Navigates to registration page
 app.get('/register', function(req, res){
   if (req.session.username)
     delete req.session.username;
@@ -221,6 +237,7 @@ app.get('/register', function(req, res){
   res.render('register', {title: 'Registration Page'});
 });
 
+// Checks if all attributes are met if not redirect to registration page
 app.post('/registrationProcess', function(req, res){
   var username = req.body.username;
   var password = req.body.pwd;
@@ -250,11 +267,13 @@ app.post('/registrationProcess', function(req, res){
   });
 });
 
+//Navigates to the Login page
 app.get('/login', function(req,res) {
   res.render('login', {title: 'Log-In Page',
                       errorMessage: ''});
 });
 
+// Checks if all login criteria are met
 app.post('/processLogin', function(req,res) {
   var username = req.body.username;
   var password = req.body.pwd;
@@ -278,11 +297,13 @@ app.post('/processLogin', function(req,res) {
   });
 });
 
+// Exits the page and navigates back to the Login
 app.get('/logout', function(req,res) {
   req.session.destroy();
   res.redirect('/login');
 });
 
+// Server port number
 app.listen(7878, function() {
   console.log("Listening on port 7878 for connections");
 });
