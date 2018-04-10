@@ -24,4 +24,6 @@ Recommendations for this project's environment include a full-screen display (*1
 
 **4.** Open any browser of your choice and write: *localhost:7878/register*
 
-**5.** If you would like to view the data for user login and etc. open MongoCompass
+**5.** After registration is completed, navigate to Home to view your Team's Stats
+
+**6.** If you would like to view the data for user login and etc. open MongoCompass
